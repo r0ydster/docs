@@ -1,0 +1,1242 @@
+SKILLS AND ABILITIES:
+
+Installed and configured Linux hosts.
+Deployed, configured, and managed multiple Java applications.
+Deployed, configured, and managed multiple Apache and Tomcat instances.
+Automated common tasks using Bash, etc.
+Planned for and troubleshot resource bottlenecks.
+Troubleshot performance issues within the application, web and database tiers.
+Very strong Linux/Unix administration and troubleshooting skills
+TCP/IP and basic networking
+Configured Apache and Tomcat servers.
+Troubleshot 3rd-tier (app, web, db) services.
+Configured and administered physical and virtual MySQL databases.
+Gained and understanding of DNS and how to configure and troubleshoot it.
+Good understanding of Ansible and GIT.
+
+
+INFO TO ASK:
+
+Work Hours:
+Shift work?
+On-Call?
+After hours support?
+Pager Duties?  Rotation?
+Support non-unix systems?
+
+Tech Stack:
+Java?
+Load Balanced?
+Redundant?
+
+Cloud?
+AWS?
+AZURE?
+GCE?
+Openstack?
+
+
+Environment:
+All Unix?
+Linux only?
+What brands?
+Number of servers?
+Root/Sudo access?
+Physical or Virtual?
+VMware, Proxmox, other?
+
+Networking Hardware? Cisco?  Other?
+
+Company provided laptop/workstation <--> windows/linux/mac laptop?
+Monitor size, chairs, etc.
+
+Tools/Languages:
+Other 3rd party?
+Proprietary tools?
+Databases?
+
+#####
+
+Amazon Web Services (AWS), including EC2, VPC, and S3:
+
+EC2: Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, re-sizable compute capacity in the cloud.
+Amazon EC2 offers the broadest and deepest compute platform with choice of processor, storage, networking, operating system.
+
+VPC: Amazon Virtual Private Cloud (Amazon VPC) is a service that lets you launch AWS resources in a logically isolated virtual network that you define.
+
+S3: Amazon Simple Storage Service (Amazon S3) is an object storage service.
+
+ELB: Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses.
+
+#####
+
+Ubuntu Networking - static IP
+
+Ubuntu 18 + uses this:
+netplan - set static IP on Ubuntu 18+
+
+16 uses /etc/network/interfaces
+
+#####
+
+SYSTEMD
+https://wiki.archlinux.org/index.php/Systemd
+
+systemd is a system and service manager for Linux operating systems.
+It replaces the UNIX System V and BSD init systems.
+The majority of Linux distributions have adopted systemd, and it is considered a de facto standard.
+
+systemctl may be used to introspect and control the state of the systemd system and service manager.
+systemd-analyze may be used to determine system boot-up performance statistics and retrieve other state and tracing information from the system and service manager.
+
+systemd-journald is a daemon responsible for event logging
+
+Table 1.  Load path when running in system mode (--system).
+           ┌────────────────────────┬─────────────────────────────┐
+           │Path                    │ Description                 │
+           ├────────────────────────┼─────────────────────────────┤
+           │/etc/systemd/system     │ Local configuration         │
+           ├────────────────────────┼─────────────────────────────┤
+           │/run/systemd/system     │ Runtime units               │
+           ├────────────────────────┼─────────────────────────────┤
+           │/usr/lib/systemd/system │ Units of installed packages
+
+
+
+systemctl status/stop/start/etc service.name
+
+Show system status using:
+systemctl status
+
+List running units:
+systemctl or systemctl list-units
+
+List failed units:
+systemctl --failed
+
+The available unit files can be seen in /usr/lib/systemd/system/ and /etc/systemd/system/ (the latter takes precedence). List installed unit files with:
+
+systemctl list-unit-files
+
+Start a unit immediately:
+systemctl start unit
+
+Stop a unit immediately:
+systemctl stop unit
+
+Restart a unit:
+systemctl restart unit
+
+Ask a unit to reload its configuration:
+systemctl reload unit
+
+Show the status of a unit, including whether it is running or not:
+systemctl status unit
+
+Check whether a unit is already enabled or not:
+systemctl is-enabled unit
+
+Enable a unit to be started on bootup:
+systemctl enable unit
+
+Enable a unit to be started on bootup and Start immediately:
+systemctl enable --now unit
+
+Disable a unit to not start during bootup:
+systemctl disable unit
+
+Reload systemd manager configuration, scanning for new or changed units:
+systemctl daemon-reload
+
+
+**  Diff between sys-init and systemd ??
+
+#####
+
+BASH SCRIPTING:
+
+Exit status:
+0 denotes success, any other number denotes a fail.
+
+Control operators (&&  and ||):
+conditional execution
+&& represents logical AND
+|| represets logical OR
+
+Conditional blocks (if, test and  [[ )
+
+Tests supported by [ (also known as test) and [[:
+-e FILE: True if file exists.
+-f FILE: True if file is a regular file.
+-d FILE: True if file is a directory.
+-h FILE: True if file is a symbolic link.
+-p PIPE: True if pipe exists.
+-r FILE: True if file is readable by you.
+-s FILE: True if file exists and is not empty.
+-t FD : True if FD is opened on a terminal.
+-w FILE: True if the file is writable by you.
+-x FILE: True if the file is executable by you.
+-O FILE: True if the file is effectively owned by you.
+-G FILE: True if the file is effectively owned by your group.
+FILE -nt FILE: True if the first file is newer than the second.
+FILE -ot FILE: True if the first file is older than the second.
+-z STRING: True if the string is empty (it's length is zero).
+-n STRING: True if the string is not empty (it's length is not zero).
+
+String operators:
+STRING = STRING: True if the first string is identical to the second.
+STRING != STRING: True if the first string is not identical to the second.
+STRING < STRING: True if the first string sorts before the second.
+STRING > STRING: True if the first string sorts after the second.
+! EXPR: Inverts the result of the expression (logical NOT).
+
+Numeric operators:
+INT -eq INT: True if both integers are identical.
+INT -ne INT: True if the integers are not identical.
+INT -lt INT: True if the first integer is less than the second.
+INT -gt INT: True if the first integer is greater than the second.
+INT -le INT: True if the first integer is less than or equal to the second.
+INT -ge INT: True if the first integer is greater than or equal to the second.
+
+Additional tests supported only by [[:
+STRING = (or ==) PATTERN: Not string comparison like with [ (or test), but pattern matching is performed. True if the string matches the glob pattern.
+STRING != PATTERN: Not string comparison like with [ (or test), but pattern matching is performed. True if the string does not match the glob pattern.
+STRING =~ REGEX: True if the string matches the regex pattern.
+( EXPR ): Parentheses can be used to change the evaluation precedence.
+EXPR && EXPR: Much like the '-a' operator of test, but does not evaluate the second expression if the first already turns out to be false.
+EXPR || EXPR: Much like the '-o' operator of test, but does not evaluate the second expression if the first already turns out to be true.
+
+Tests exclusive to [ (and test):
+EXPR -a EXPR: True if both expressions are true (logical AND).
+EXPR -o EXPR: True if either expression is true (logical OR).
+
+Conditional Loops (while, until and for):
+while command: Repeat so long as command is executed successfully (exit code is 0).
+until command: Repeat so long as command is executed unsuccessfully (exit code is not 0).
+for variable in words: Repeat the loop for each word, setting variable to each word in turn.
+
+for (( expression; expression; expression )): Starts by evaluating the first arithmetic expression; repeats the loop so long as the second arithmetic expression is successful; and at the end of each loop evaluates the third arithmetic expression.
+
+Choices (case and select)
+
+File descriptors:
+Standard Input (stdin): File Descriptor 0
+Standard Output (stdout): File Descriptor 1
+Standard Error (stderr): File Descriptor 2
+
+Redirection:
+command > file: Send the stdout of command to file.
+command 1> file: Send the stdout of command to file. Since stdout is FD 1, that's the number we put in front of the redirection operator. This is identical to the previous example, because FD 1 is the default for the > operator.
+command < file: Use the contents of file when command reads from stdin.
+command 0< file: Use the contents of file when command reads from stdin, exactly as in the previous example, since FD 0 (stdin) is the default for the < operator.
+
+2> /dev/null: redirect stderr to null.
+2>&1: redirect stderr to stdout.
+
+IFS = Internal Field Seperator: is a string of special characters which are to be treated as delimiters between words/fields when splitting a line of input.
+[[ ]] = tests
+\ = escape
+! = negate
+>, >>, < = redirection
+| = pipe
+{ } = inline group
+() = subshell group
+(( )) = arithmetic expression
+
+Variable types:
+Array: declare -a variable: The variable is an array of strings.
+Associative array: declare -A variable: The variable is an associative array of strings (bash 4.0 or higher).
+Integer: declare -i variable: The variable holds an integer. Assigning values to this variable automatically triggers Arithmetic Evaluation.
+Read Only: declare -r variable: The variable can no longer be modified or unset.
+Export: declare -x variable: The variable is marked for export which means it will be inherited by any child process.
+
+#####
+
+DOCKER
+
+Basics
+Platform — the software that makes Docker containers possible
+Engine — client-server app (CE or Enterprise)
+Client — handles Docker CLI so you can communicate with the Daemon
+Daemon — Docker server that manages key things
+Volumes — persistent data storage
+Registry — remote image storage
+Docker Hub — default and largest Docker Registry
+Repository — collection of Docker images, e.g. Alpine
+
+Scaling
+Networking — connect containers together
+Compose — time saver for multi-container apps
+Swarm — orchestrates container deployment
+Services — containers in production
+
+Docker Engine is the client-server application.
+Docker CE - open source version.
+Docker Enterprise - supported version.
+
+A Dockerfile is a file with instructions for how Docker should build your image.
+
+Docker Container
+A Docker image plus the command docker run image_name creates and starts a container from an image.
+
+Docker Client - Docker CLI
+
+Docker Daemon - is the Docker server that listens for Docker API requests. The Docker Daemon manages images, containers, networks, and volumes.
+
+Docker Volumes are the best way to store the persistent data that your apps consume and create.
+
+A Docker Registry is the remote location where Docker Images are stored. You push images to a registry and pull images from a registry. You can host your own registry or use a provider’s registry.
+
+Docker Hub is the largest registry of Docker images. It’s also the default registry. You can find images and store your own images on Docker Hub for free.
+
+Docker Compose is a tool that makes it easier to run apps that require multiple Docker containers.
+Docker Compose allows you to move commands into a docker-compose.yml file for reuse.
+The Docker Compose command line interface (cli) makes it easier to interact with your multi-container app.
+Docker Compose comes free with your installation of Docker.
+
+Docker Swarm is a product to orchestrate container deployment.
+
+Kubernetes automates deployment, scaling, and management of containerized applications.
+It’s the clear winner in the container orchestration market.
+Instead of Docker Swarm, use Kubernetes to scale up projects with multiple Docker containers.
+Kubernetes isn’t an official part of Docker; it’s more like Docker’s BFF.
+
+Running Docker Containers
+docker start [container]: Start a particular container.
+docker stop [container]: Stop a particular container.
+docker exec -ti [container] [command]: Run a shell command inside a particular container.
+docker run -ti — image [image] [container] [command]: Create and start a container at the same time, and then run a command inside it.
+docker run -ti — rm — image [image] [container] [command]: Create and start a container at the same time, run a command inside it, and then remove the container after executing the command.
+docker pause [container]: Pause all processes running within a particular container.
+
+Using Docker Utilities:
+docker history [image]: Display the history of a particular image.
+docker images: List all of the images that are currently stored on the system.
+docker inspect [object]: Display low-level information about a particular Docker object.
+docker ps: List all of the containers that are currently running.
+docker version: Display the version of Docker that is currently installed on the system.
+Cleaning Up Your Docker Environment:
+docker kill [container]: Kill a particular container.
+docker kill $(docker ps -q): Kill all containers that are currently running.
+docker rm [container]: Delete a particular container that is not currently running.
+docker rm $(docker ps -a -q): Delete all containers that are not currently running.
+
+https://docs.docker.com/engine/reference/commandline/docker/
+https://hackernoon.com/docker-commands-the-ultimate-cheat-sheet-994ac78e2888
+https://towardsdatascience.com/learn-enough-docker-to-be-useful-b7ba70caeb4b
+
+#####
+NETWORKING
+
+Popular PORTS:
+
+21 - FTP - TCP
+22 - SSH - TCP
+25 - SMTP - TCP
+53 - DNS - TCP and UDP
+67 - DHCP - UDP
+80 - HTTP - TCP
+110 - POP3 - TCP
+111 - portmapper - TCP and UDP
+143 - IMAP - TCP
+161 - SNMP - UDP
+389 - LDAP - TCP
+443 - HTTP over SSL - TCP
+993 - IMAP over SSL - TCP
+995 - POP over SSL - TCP
+
+http://en.wikipedia.org/wiki/Internet_Protocol_Suite
+
+OSI Model:
+
+    Layer 7 - Application
+    Layer 6 - Presentation
+    Layer 5 - Session
+    Layer 4 - Transport
+    Layer 3 - Network
+    Layer 2 - Data Link
+    Layer 1 - Physical
+
+Q: What is the difference between layer 2 and layer 3 in the OSI model?
+A: Basically a layer 2 switch operates utilizing Mac addresses in it's caching table to
+quickly pass information from port to port. A layer 3 switch utilizes IP addresses
+to do the same.
+
+TCP: Transmission Control Protocol - Application layer - full connections with error checking and correction.
+IP: Internet Protocol - layer 2 - delivery not guaranteed.
+ICMP: Internet Control Message Protocol
+UDP: User Datagram Protocol -  layer 3 - delivery not guaranteed.
+
+DNS:
+Domain Name System (DNS) is a distributed database of computers that converts between IP addresses and hostnames.
+DNS tools: nslookup, host, whois, dig,
+
+CAT OS - Cisco OS on catalyst switches.
+
+REDHAT/FEDORA/CENTOS NETWORK CONFIGURATION FILES:
+
+/etc/sysconfig/network.
+/etc/sysconfig/network-scripts/ifcfg-eth0 (ens##)
+
+DNS:
+
+The Internet maintains two principal namespaces, the domain name hierarchy[3] and the Internet Protocol (IP) address spaces.[4] The Domain Name System maintains the domain name hierarchy and provides translation services between it and the address spaces. Internet name servers and a communication protocol implement the Domain Name System.[5] A DNS name server is a server that stores the DNS records for a domain name, such as address (A) records, name server (NS) records, and mail exchanger (MX) records (see also list of DNS record types); a DNS name server responds with answers to queries against its database.
+
+CLIENT SIDE DNS:
+/etc/hosts
+/etc/resolv.conf
+/etc/nsswitch.conf
+
+DNS SERVER CONFIGURATION
+
+/etc/named.conf
+/var/named/*
+/usr/sbin/rndc
+
+LDAP CLIENT
+
+ldapsearch
+ldappasswd
+ldapadd
+ldapdelete
+
+EMAIL SERVICES
+
+postfix and sendmail
+/etc/aliases
+/etc/mail/*
+/etc/postfix/*
+sendmail emulation layer commands
+/var/spool/mail
+mail-related logs in /var/log/
+
+PERFORMANCE MONITORING AND DIAGNOSTICS:
+
+CPU:
+top
+sar
+uptime
+w
+ps
+mpstat
+vmstat
+procinfo
+
+MEMORY:
+free
+top
+vmstat
+sar
+
+NETWORK IO:
+ethtool
+netstat
+losf
+tcpdump
+ip
+iptraf
+
+DISK IO:
+sar -g
+iostat
+vmstat
+lsof
+
+APPLICATION:
+strace
+
+#####
+
+ROUTING:
+route: show/manipulate the IP routing table.
+
+NETWORK TROUBLESHOOTING TOOLS:
+ping, traceroute, netstat, tcpdump, wireshark, telnet, ifconfig, ifup, ifdown, route, host, dig, mtr
+
+TCP vs. UDP:
+TCP guarantees delivery where as UDP does not guarantee delivery.
+
+IPS: Intrusion Prevention System - a network security/threat prevention technology that examines network traffic flows to detect and prevent vulnerability exploits.
+
+IDS: Intrusion Detection System - a device or software application that monitors network or system activities for malicious activities or policy violations and produces reports to a management station.
+
+#####
+
+MAC: Media Access Control - Unique hardware address for Network cards.
+UDP: User Datagram Protocol - not guaranteed delivery.
+LDAP: Lightweight Directory Access Protocol is an application protocol for querying and modifying data using directory services running over TCP/IP.
+UUID: universally unique identifier.
+
+###############################################################################
+
+MODULES:
+
+Display currently loaded modules:
+lsmod
+
+Load/unload kernel modules
+* insmod: insert a single module.
+* modprobe: insert a module including all other modules it depends on.
+* rmmod: program to remove a module from the Linux Kernel.
+* modinfo: print some information about a module, e.g. author, description, parameters the module accepts, etc.
+* lsmod: program to show the status of modules in the Linux Kernel.
+* depmod: program to generate modules.dep and map files.
+* uname: print system information.
+
+#####
+
+LIBRARIES:
+
+ldconfig: /sbin/ldconfig - configure dynamic linker run time bindings.
+The ldconfig program updates caches and links used by the system for locating libraries that is, it reads /etc/ld.so.conf and implements any changes in that file or in the directories to which it refers.
+
+ldd: print shared library dependencies - The ldd command will let you find out which libraries a program uses:
+gnu-linux:~$ ldd /usr/bin/bash
+
+#####
+
+CREATE A FILESYSTEM:
+
+mkfs -t $FILESYSTEM_TYPE $DEVICE
+
+mkfs -t ext4 /dev/hda1
+
+#####
+
+LVM
+
+pvcreate - physical volume create
+vgcreate - volume group create
+lvcreate - logical volume create
+lvremove - remove logical volume
+pvs  - report info about physical volumes
+vgs - report info about logical volumes
+lvdisplay - display logical volumes
+pvdisplay - display physical volumes
+8E = partition type
+
+#####
+
+FILESYSTEM TUNING:
+
+dumpe2fs: dump ext2/ext3 filesystem information.
+tune2fs - adjust tunable filesystem parameters on ext2/ext3 filesystems.
+debugfs - ext2/ext3 file system debugger - DO NOT USE ON MOUNTED FS.
+hdparm - get/set SATA/ATA device parameters
+sdparm - access SCSI modes pages; read VPD pages; send simple SCSI commands.
+
+#####
+
+http://tweaked.io/guide/kernel/
+
+KERNEL TUNING:
+
+sysctl -a: show all kernel parameters
+
+#####
+CONFIG MANAGEMENT TOOLS = Ansible/Chef/CFEngine/Puppet/SaltStack
+https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software
+
+Ansible:  It combines multi-node software deployment, ad hoc task execution, and configuration management.  It manages nodes over SSH or PowerShell and requires Python (2.4 or later) to be installed on them. Modules work over JSON and standard output and can be written in any programming language. The system uses YAML to express reusable descriptions of systems.  Ansible uses an agentless architecture.
+
+/etc/ansible/hosts - INI file of inventory
+
+Playbooks express configurations, deployment, and orchestration in Ansible.  The Playbook format is YAML. Each Playbook maps a group of hosts to a set of roles. Each role is represented by calls to Ansible call tasks.
+-----
+Chef: Chef is a company & configuration management tool written in Ruby and Erlang. It uses a pure-Ruby, domain-specific language (DSL) for writing system configuration "recipes". Chef is used to streamline the task of configuring and maintaining a company's servers, and can integrate with cloud-based platforms to automatically provision and configure new machines.
+
+The user writes "recipes" that describe how Chef manages server applications and utilities and how they are to be configured. These recipes (which can be grouped together as a "cookbook" for easier management) describe a series of resources that should be in a particular state: packages that should be installed, services that should be running, or files that should be written. These various resources can be configured to specific versions of software to run and can ensure that software is installed in the correct order based on dependencies. Chef makes sure each resource is properly configured and corrects any resources that are not in the desired state
+
+Chef can run in client/server mode, or in a standalone configuration named "chef-solo". In client/server mode, the Chef client sends various attributes about the node to the Chef server. The server uses Solr to index these attributes and provides an API for clients to query this information.
+-----
+CFEngine: CFEngine provides an operating system-independent interface to Unix-like host configuration. It requires some expert knowledge to deal with peculiarities of different operating systems, but has the power to perform maintenance actions across multiple hosts. CFEngine can be used on Windows hosts as well, and is widely used for managing large numbers of Unix hosts that run heterogeneous operating systems.
+-----
+Puppet: Information is stored in files called "Puppet manifests".
+Puppet discovers the system information via a utility called Facter, and compiles the Puppet manifests into a system-specific catalog containing resources and resource dependency, which are applied against the target systems. Any actions taken by Puppet are then reported.
+
+/etc/puppet/manifests/site.pp (On Master) The first manifest that the master parses when a client connects in order to produce the configuration to apply to it.
+
+/etc/puppet/environments/production/manifests/site.pp (On Master) The first manifest that the master parses when using directory environments (recommended from Puppet 3.6 and default on Puppt >= 4)
+
+/etc/puppet/modules and /usr/share/puppet/modules (On Master) The default directories where modules are searched.
+
+/etc/puppet/environments/production/modules (On Master) An extra place where modules are looked for when using directory environments.
+-----
+SaltStack: SaltStack platform or Salt is a Python-based open source configuration management software and remote execution engine. Supporting the "infrastructure-as-code" approach to deployment and cloud management.
+
+The Salt system maintains many module types to manage specific actions. Modules can be added to any of the systems that support dynamic modules. These modules manage all of the remote execution and state management behavior of Salt. The modules can be separated into six groups:
+
+Execution modules: The execution modules represent the functions that are available for direct execution from the remote execution engine. These modules contain the specific cross platform information used by Salt to manage portability, and constitute the core api of system level functions used by Salt systems.
+
+State modules: the components that make up the backend for the Salt configuration management system. These modules execute the code needed to enforce, set up or change the configuration of a target system. Like other modules, more states become available when they are added to the states modules.
+
+Grains: constitute a system for detecting static information about a system and storing it in RAM for rapid gathering.
+
+Renderer modules: used to render the information passed to the Salt state system. The renderer system is what makes it possible to represent Salt's configuration management data in any serializable format.
+
+Returners: the remote execution calls made by Salt are detached from the calling system; this allows the return information generated by the remote execution to be returned to an arbitrary location. Management of arbitrary return locations is managed by the Returner Modules.
+
+Runners are master side convenience applications executed by the salt-run command.
+
+#####
+
+GIT: VCS written in C, Open Source, free.
+
+difference between git fetch and git pull?
+
+git fetch is the command that tells your local git to retrieve the latest meta-data info from the original (yet doesn't do any file transferring. It's more like just checking to see if there are any changes available).
+
+git pull on the other hand does that AND brings (copies) those changes from the remote repository.
+#####
+
+Red Hat kickstart Server - Automated OS Installations over the network.
+http://www.linux-mag.com/id/6747/
+
+starts with a server running DHCP, tftboot.
+
+Create PXE menus:
+mkdir /tftpboot/pxelinux.cfg/
+
+Copy Releases to tftboot dir:
+/tftpboot/images/RHEL/x86_64/6.0/
+Copy vmlinuz and initrd.img from /images/pxeboot/ directory on "disc 1" to /tftpboot/images/RHEL/$ARCH/$RELEASE
+
+edit /etc/dhcp.conf to allow PXE booting:
+
+allow booting;
+    allow bootp;
+    option option-128 code 128 = string;
+    option option-129 code 129 = text;
+    next-server xxx.xxx.xxx.xxx; # IP addy of PXE server
+    filename "/pxelinux.0";
+
+Create PXE menu in /tftboot/pxelinux.cfg/
+cp anaconda-ks.cfg here - edit as required.
+
+#####
+
+OPEN FILE TUNING:
+
+You can view the current limit on the number of open-files by running:
+cat /proc/sys/fs/file-max
+
+If you wish that change to be made persistently you should append to the file /etc/sysctl.conf the line:
+fs.file-max = 100000
+Then run the following command to make your change take effect:
+# sysctl -p
+
+#####
+
+inodes
+add/delete/modify/count
+
+See inodes usage:
+df –hi
+ls –li
+stat
+
+#####
+
+CHECKING FILESYSTEMS:
+
+fsck - Run fsck only on filesystems that are not currently mounted or that are mounted in read-only mode.
+
+#####
+
+LINKS:
+
+Hard links are produced by creating two directory entries that point to the same file (more precisely, the same inode) and cannot cross filesystems.
+Symbolic/Soft links are a separate file whose contents point to the linked-to file, and can cross filesystems.
+
+Hard link: ln /source /link
+Soft/Symbolic Link: ln -s /source /link
+
+#####
+
+Changing File Attributes:
+
+chattr
+lsattr
+
+#####
+
+RAID
+Redundant Array of Independent Disks or Redundant Array of Inexpensive Disks.
+
+http://en.wikipedia.org/wiki/RAID
+
+RAID 0: Block-level striping without parity or mirroring. 2 disk Minimum. Fault tolerance 0.
+
+RAID 1: Mirroring without parity or striping.  2 disk Minimum.
+
+RAID 2: Bit-level striping with dedicated Hamming-code parity. 3 Disk Minimum.
+
+RAID 3: Byte-level striping with dedicated parity. 3 Disk Minimum.
+
+RAID 4: Block-level striping with dedicated parity.  3 Disk Minimum.
+
+RAID 5: Block-level striping with distributed parity.  3 Disk Minimum.
+
+RAID 6: Block-level striping with double distributed parity.  4 Disk Minimum.
+
+#####
+
+DHCP
+
+dhcpd.conf
+dhcpd.leases
+arp
+dhcpd
+
+#####
+
+PAM
+
+/etc/pam.d
+pam.conf
+nsswitch.conf
+pam_unix, pam_cracklib, pam_limits, pam_listfile
+
+#####
+
+APACHE
+
+RH/CENTOS:
+Set the apache service to start on boot:
+chkconfig --levels 235 httpd on
+
+Main Config file: /etc/httpd/conf/httpd.conf
+
+Start|stop apache: service httpd {start | stop}
+
+Apache Modules:
+/etc/httpd/modules/
+
+list available Apache modules: yum search mod_
+install modules: yum install mod_[module-name]
+Install perl support: yum install mod_perl
+	PHP: yum install php php_pear
+     python: yum install mod_wsgi
+
+#####
+
+Elasticsearch: Runs on Lin/Win/Mac
+
+ElasticSearch is a highly scalable open source search engine with a REST API
+Once you have an instance of ElasticSearch up and running you can talk to it using it's JSON based REST API residing at localhost port 9200. You can use any HTTP client to talk to it.
+
+ElasticSearch is an Open Source (Apache 2), Distributed Search Engine built on top of Apache Lucene. It allows you to start with one machine and scale to hundreds, and supports distributed search deployed over Amazon EC2's cloud hosting.
+
+#####
+CACHE SERVER:
+A cache server is a dedicated network server or service acting as a server that saves Web pages or other Internet content locally. By placing previously requested information in temporary storage, or cache, a cache server both speeds up access to data and reduces demand on an enterprise's bandwidth. Cache servers also allow users to access content offline, including rich media files or other documents. A cache server is sometimes called a "cache engine."
+
+http://en.wikipedia.org/wiki/Web_cache
+
+#####
+
+NFS AND NFS TROUBLESHOOTING:
+
+/etc/exports - serves  as  the  access control list for file systems which may be exported to NFS clients.
+exportfs - maintain list of NFS exported file systems.
+showmount - show mount information for an NFS server.  Queries the mount daemon on a remote host for information about the state of the NFS server on that machine.
+nfsstat - lists NFS statistics.
+rpcinfo - report RPC information
+mountd - NFS mount daemon.
+portmapper - Portmap is a server that converts RPC program numbers into DARPA protocol port numbers.  It must be running in order to make RPC calls.
+/proc/mounts - shows currently mounted FS and state of FS.
+/etc/fstab - static information about the filesystems
+
+http://stromberg.dnsalias.org/~strombrg/NFS-troubleshooting-2.html
+
+http://www.troubleshooters.com/linux/nfs.htm
+
+http://www.bga.org/~lessem/psyc5112/usail/network/nfs/tips.html
+
+http://tldp.org/HOWTO/NFS-HOWTO/troubleshooting.html
+
+#####
+
+PERFORMANCE TUNING:
+
+http://performancewiki.com/home.html
+
+#####
+
+How to tell if OS is 32/64 bit:
+
+uname -a
+#####
+
+PAM - Pluggable Authentication Modules
+Pluggable authentication modules, or PAM, is a mechanism to integrate multiple low-level authentication schemes into a high-level application programming interface (API).
+
+http://en.wikipedia.org/wiki/Pluggable_Authentication_Modules
+
+#####
+
+CRON:
+
+Crontab syntax
+======================================
+ * * * * * command to be executed
+ - - - - -
+ | | | | |
+ | | | | +----- day of week (0 - 6) (Sunday=0)
+ | | | +------- month (1 - 12)
+ | | +--------- day of month (1 - 31)
+ | +----------- hour (0 - 23)
+ +------------- min (0 - 59)
+
+#####
+
+RPM COMMANDS:
+
+rpm -ivh {package.rpm} - Install (Verbose Hash) package
+rpm -Uvh - Upgrade package.
+rpm -ev - Erase package.
+rpm -ev --nodeps - Erase/remove an installed package without checking for dependencies.
+rpm -qa	- List all installed packages
+rpm -qi - Display installed information along with package version and short description
+rpm -qf {/path/to/file}	- Find out what package a file belongs to i.e. find what package owns the file
+rpm -qc - Display list of configuration file(s) for a package.
+rpm -qcf {/path/to/file}- Display list of configuration files for a command.
+rpm -qa --last - Display list of all recently installed RPMs.
+rpm -qR {package} - Find out what dependencies a rpm file has.
+
+#####
+
+SQL DATA MANAGEMENT
+
+insert
+update
+select
+delete
+from
+where
+group by
+order by
+join
+limit
+
+phpmyadmin - SQL for GUI
+
+#####
+
+Http -  Apache web server, which is a C implementation of an HTTP web server.
+Port 80 - TCP
+HTTPS (HTTP over SSL) - Port 443 - TCP
+Config file = /etc/httpd/conf/httpd.conf
+apachectl
+http://en.wikipedia.org/wiki/List_of_HTTP_headers
+
+#####
+
+Jetty - Jetty is a pure Java-based HTTP client/server, WebSocket client/server and servlet container (Application server) developed as a free and open source project as part of the Eclipse Foundation.
+Jetty provides Web services in an embedded Java application and it is already a component of the Eclipse IDE. It supports AJP, JASPI, JMX, JNDI, OSGi, Web Sockets and other Java technologies.
+
+Tomcat - Apache Tomcat (or Jakarta Tomcat or simply Tomcat) is an open source servlet container developed by the Apache Software Foundation (ASF). Tomcat implements the Java Servlet and the JavaServer Pages (JSP) specifications from Oracle Corporation, and provides a "pure Java" HTTP web server environment for Java code to run.
+* Catalina is Tomcat's servlet container.
+* Coyote is Tomcat's HTTP Connector component that supports the HTTP 1.1 protocol for the web server or application container. Coyote listens for incoming connections on a specific TCP port on the server and forwards the request to the Tomcat Engine to process the request and send back a response to the requesting client.
+* Jasper is Tomcat's JSP Engine.
+
+#####
+
+Squid/cache
+Squid is a proxy server and web cache daemon.
+http://en.wikipedia.org/wiki/Squid_(software)
+* A proxy server is a server (a computer system or an application) that acts as an intermediary for requests from clients seeking resources from other servers.
+* A web cache is a mechanism for the temporary storage (caching) of web documents to reduce bandwidth usage, server load, and perceived lag. A web cache stores copies of documents passing through it - subsequent requests may be satisfied from the cache if certain conditions are met.
+
+#####
+
+LDAP - Lightweight Directory Access Protocol -  is an application protocol for accessing and maintaining distributed directory information services over an Internet Protocol (IP) network.
+LDAP - Port 389 - TCP
+LDAP CLIENT APPS:
+ldapsearch
+ldappasswd
+ldapadd
+ldapdelete
+
+#####
+
+Nagios - is a popular open source computer system and network monitoring software application. It watches hosts and services, alerting users when things go wrong and again when they get better.
+http://en.wikipedia.org/wiki/Nagios
+
+Add user to Nagios:
+cd to /usr/local/nagios/etc
+
+Add a single user:
+sudo htpasswd /usr/local/nagios/etc/htpasswd.users username
+
+Add email and sms info to nagios:
+edit /usr/local/nagios/etc/contacts.cfg with your information.
+
+Add your info the the contacts group to get sms messages:
+edit /usr/local/nagios/etc/contact_groups.cfg
+
+/usr/local/nagios/etc
+commands.cfg
+contact_groups.cfg
+contacts.cfg
+services.cfg
+
+Objects Directory:
+/usr/local/nagios/etc/objects
+server_name.cfg - this file defines the host, defines services that are checked, etc.  Created by create_cfg.pl
+
+/usr/local/nagios/libexec - location of default nagios check scripts.
+
+#####
+
+rrd - RRDtool (acronym for round-robin database tool) aims to handle time-series data like network bandwidth, temperatures, CPU load, etc. The data are stored in a round-robin database (circular buffer), thus the system storage footprint remains constant over time.  It also includes tools to extract RRD data in a graphical format.
+
+MRTG - CACTI - NAGIOS - MUNIN - ZENOSS all use this tool.
+
+#####
+
+http error codes is another good one.
+Whats return code of http 200 vs 30x, vs 40x etc.
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+
+Informational 1xx - This class of status code indicates a provisional response, consisting only of the Status-Line and optional headers, and is terminated by an empty line. There are no required headers for this class of status code.
+
+Successful 2xx - This class of status code indicates that the client's request was successfully received, understood, and accepted.
+
+* 200 OK - Standard response for successful HTTP requests.
+* 202 Accepted - The request has been accepted for processing, but the processing has not been completed.
+* 204 No Content - The server successfully processed the request, but is not returning any content.
+
+Redirection 3xx - The client must take additional action to complete the request.  This class of status code indicates that further action needs to be taken by the user agent in order to fulfil the request. The action required may be carried out by the user agent without interaction with the user if and only if the method used in the second request is GET or HEAD. A user agent should not automatically redirect a request more than five times, since such redirections usually indicate an infinite loop.
+
+* 301 Moved Permanently - This and all future requests should be directed to the given URI.
+* 302 - Found
+* 303 - See Other
+
+Client Error 4xx - The 4xx class of status code is intended for cases in which the client seems to have erred. Except when responding to a HEAD request, the server should include an entity containing an explanation of the error situation, and whether it is a temporary or permanent condition. These status codes are applicable to any request method. User agents should display any included entity to the user. These are typically the most common error codes encountered while online.
+
+* 400 Bad Request - The request cannot be fulfilled due to bad syntax.
+* 401 Unauthorized - Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided.
+* 403 Forbidden - The request was a legal request, but the server is refusing to respond to it.  Unlike a 401 Unauthorized response, authenticating will make no difference.
+* 404 Not Found - The requested resource could not be found but may be available again in the future.  Subsequent requests by the client are permissible.
+
+Server Error 5xx - The server failed to fulfill an apparently valid request.  Response status codes beginning with the digit "5" indicate cases in which the server is aware that it has encountered an error or is otherwise incapable of performing the request. Except when responding to a HEAD request, the server should include an entity containing an explanation of the error situation, and indicate whether it is a temporary or permanent condition. Likewise, user agents should display any included entity to the user. These response codes are applicable to any request method.
+
+* 500 Internal Server Error - A generic error message, given when no more specific message is suitable.
+* 501 Not Implemented - The server either does not recognise the request method, or it lacks the ability to fulfill the request.
+* 502 Bad Gateway - The server was acting as a gateway or proxy and received an invalid response from the upstream server.
+* 503 Service Unavailable - The server is currently unavailable (because it is overloaded or down for maintenance).  Generally, this is a temporary state.
+
+#####
+
+What are the different ways to check the load average on a system?
+vmstat, top, uptime, w, procinfo
+
+Describe the 3 values that top/uptime shows
+1-minute, 5-minute and 15-minute load averages
+
+What are the different running states of a SOLARIS system?
+1,2, and 3
+
+How do you check CPU and MEMORY resources on a server?
+Memory: dmesg |grep mem, top, free -g
+
+SOL: prtdiag |grep Memory, prtconf -v |grep Mem
+SOL: CPU: /usr/sbin/psrinfo -v
+
+How do you obtain system activity for a particular time frame (Say noon to 10PM)?
+a) Use the command 'sar'
+b) sar consists of three commands that are involved in automatic system activity
+data collection: sadc, sa1, and sa2.
+c) To make sure sadc is run at boot time, the /etc/init.d/perf file must contain
+a command line that writes a record to the daily data file.
+d) The command entry has the following format: /usr/bin/su sys -c
+"/usr/lib/sa/sadc /var/adm/sa/sa`date +%d`"
+e) This entry is already in the /etc/init.d/perf file, but it needs to be
+uncommented.
+f) Put a line into the /var/spool/cron/crontabs/sys file, which calls the shell
+script, sa1. This script invokes sadc and writes to the daily data files,
+/var/adm/sa/sa<dd>. The sa1 script gets installed with the other sar packages
+and has the following syntax: /usr/lib/sa/sa1 [t n]
+g) The syntax for the sar command is as follows: sar [-aAbcdgkmpqruvwy] [-o
+<outputfile>] [t n ]
+h) So in answer to the original question the command to obtain system activity
+from 12:00 PM to 10:00 PM is as follows: sar -s 12 -e 22 -i 3600 -A
+
+How do you check disk usage. How do you trouble shoot a high disk usage issue
+(Available disk space is at 2% and could crash the application)
+First see which partiton is full
+LIN: df -h
+SOL: du -hk
+To find out which files/folders are taking up the most space
+LIN: du -a | sort -n -r
+SOL: /du -dk / | sort -n (doesn't work on linux)
+To delete files older than x number of days in the current working directory and
+below, the safe way is:
+
+For log files older than 5 days
+
+find /opt/app/logs/ -name *.log -mtime +5 -exec ls -tl {} \;
+find /opt/app/logs/ -name *.log -mtime +5 -exec rm -f {} \;
+
+For log files newer than 5 days
+
+find /opt/app/logs/ -name *.log -mtime -5 -exec ls -tl {} \;
+find /opt/app/logs/ -name *.log -mtime -5 -exec rm -f {} \;
+
+How do you check the ports in use on a server?
+netstat -an
+
+What is garbage collection in Java?
+When an object is no longer referenced by the program, the heap space it
+occupies must be recycled so that the space is available for subsequent new
+objects. The garbage collector must somehow determine which objects are no
+longer referenced by the program and make available the heap space occupied by
+such unreferenced objects. In the process of freeing unreferenced objects, the
+garbage collector must run any finalizers of objects being freed.
+
+#####
+
+LINUX NETWORKING COMMANDS:
+
+Basic Linux Network Commands:
+w
+Shows who is currently logged in and where they are logged in from.
+======================================
+who
+This also shows who is on the server in an shell.
+======================================
+netstat
+Shows all current network connections.
+======================================
+netstat -an
+Shows all connections to the server, the source and destination ips and ports.
+======================================
+netstat -rn
+Shows routing table for all ips bound to the server.
+======================================
+netstat -an |grep :80 |wc -l
+Show how many active connections there are to apache (httpd runs on port 80)
+======================================
+top
+Shows live system processes in a formatted table, memory information, uptime and
+other useful info.
+======================================
+While in top, Shift + M to sort by memory usage or Shift + P to sort by CPU usage.
+======================================
+top -u root
+Show processes running by user root only.
+======================================
+route -n
+Shows routing table for all ips bound to the server.
+======================================
+route add default gw my_computer
+Add a default gateway to my_computer.
+======================================
+nslookup yahoo.com
+Query your default domain name server (DNS) for an Internet name (or IP number)
+host_to_find.
+======================================
+traceroute yahoo.com
+Have a look how you messages travel to yahoo.com
+======================================
+tracepath yahoo.com
+Performs a very similar function to traceroute.
+======================================
+ifconfig
+Display info on the network interfaces.
+======================================
+ifconfig -a
+Display into on all network interfaces on server, active or inactive.
+======================================
+ifconfig eth0 down
+This will take eth0 (assuming the device exists) down, it won't be able to receive or
+send anything until you put the device back "up" again.
+======================================
+ifconfig eth0 up
+This would take eth0 up and available to receive or send packets.
+======================================
+/sbin/ifconfig eth0 192.168.10.12 netmask 255.255.255.0 broadcast 192.168.10.255
+Assign IP 192.168.10.12, netmask and broadcast address to interface eth0.
+======================================
+ifup eth0
+Will bring eth0 up if it is currently down.
+======================================
+ifdown eth0
+Will bring eth0 down if it is currently up.
+======================================
+ifcfg
+Use ifcfg to configure a particular interface. Simply type ifcfg to get help on using
+this script.
+======================================
+ifcfg eth0 del 192.168.0.1
+This command takes eth0 down and removes the assigned IP 192.168.0.1
+======================================
+ifcfg eth0 add 192.168.0.2
+This command brings eth0 up and assigns the new IP 192.168.0.2
+======================================
+ping
+Sends test packets (ICMP) to a specified server to check if it is responding properly
+======================================
+mii-tool (deprecated) use ethtool
+Checks what your duplex settings are.
+======================================
+arp
+Command mostly used for checking existing Ethernet connectivity and IP address
+======================================
+hostname
+Tells the user the host name of the computer they are logged into.
+======================================
+findsmb
+Used to list info about machines that respond to SMB name queries. findsmb with no
+argument would find all machines possible. You can also specify a particular subnet
+to localize search.
+======================================
+host yahoo.com
+Performs a simple lookup of an internet address using DNS.
+======================================
+dig yahoo.com
+The "domain information groper" tool. This example looks up information about
+yahoo.com such as IP.
+======================================
+dig -x 66.94.234.13
+Looks up the address and returns the associated domain name. dig takes a huge number
+of options (at the point of being too many), refer to the manual page for more
+information.
+======================================
+whois
+Used to look up the contact information from the "whois" databases. Also reports IP
+address and name server of domain as well as creation and expiration dates.
+======================================
+ftp
+File transfer protocol. Transfers files to another host (insecure)
+======================================
+rdesktop
+Display remote desktop on Linux Machine. You can use to connect to Windows.
+======================================
+Route
+Route manipulates the kernels IP routing tables.
+Its primary use is to set up static routes to specific hosts or networks via an interface after it has been configured with the ifconfig(8) program.
+======================================
+rsync
+An open source utility that provides fast incremental file transfer. Can be
+transferred via ssh.
+======================================
+rsync -av -e ssh remote@server:/home/dir /local/dir
+Rsync command used via ssh to login as default user on remote server to fetch
+/home/dir to local server and path /local/dir.
+======================================
+tcpdump
+Print all the network traffic going through the network.
+======================================
+tcpdump -v
+Display the verbose output.
+======================================
+tcpdump -D
+Display network interfaces available for the capture.
+======================================
+tcpdump -n
+Display numerical addresses rather than symbolic (DNS) addresses.
+======================================
+tcpdump -i eth0
+Capture the traffic of eth0 interface.
+======================================
+tcpdump udp
+Capture the UDP traffic.
+======================================
+tcpdump -w
+capture.log Send the capture output in a file instead of directly on the screen.
+======================================
+tcpdump -r capture.log
+Read a capture file.
+======================================
+tcpdump port http
+Capture the TCP port 80 traffic.
+======================================
+tcpdump -i eth0 host 66.94.234.13
+Listen to all traffic on interface eth0 going to 66.94.234.13. This troubleshooting
+technique can determine why a web connection is not reaching yahoo.com
+(66.94.234.13).
+======================================
+tcpdump host www.yahoo.com
+Display the packets having "www.openmaniak.com" as their source or destination
+address.
+======================================
+tcpdump src 192.168.1.2 and dst 192.168.1.3 and port ftp
+Display the FTP packets coming from 192.168.1.2 to 192.168.1.3.
+======================================
+nmap
+A very advanced network tool used to query machines (local or remote) as to whether
+they are up and what ports are open on these machines.
+======================================
+nc
+Netcat is a networking utility which reads and writes data across network
+connections, using the TCP/IP protocol.
+======================================
+wget
+(GNU Web get) used to download files from the World Wide Web. To archive a single
+web-site.
+======================================
+curl
+Another remote downloader similar to wget.
+======================================
+
+NETWORK CONFIGURATION FILES
+======================================
+All the network related configuration files on a Linux platform.
+======================================
+/etc
+This directory contains most of the basic Linux system-configuration Files.
+======================================
+/etc/sysconfig
+Contains important system configuration files that are created and maintained by
+various services (including iptables, samba, and most networking services).
+======================================
+/etc/sysconfig/network
+Network configuration file used by the system during the boot process.
+======================================
+/etc/sysconfig/network-scripts
+Configuration files that are run during boot process related to setting up of your
+network.
+======================================
+/etc/xinetd.d
+Contains a set of files, each of which defines a network service that the xinetd
+daemon listens for on a particular port.
+======================================
+/etc/syslogd.conf
+The configuration file for the syslogd daemon. syslogd is the daemon that takes care
+of logging (writing to disk) messages coming from other programs to the system.
+======================================
+/etc/resolv.conf
+Host name resolver configuration file. This configures Linux so that it knows which
+DNS server will be resolving domain names into IP addresses.
+======================================
+/etc/hosts
+Locally resolve node names to IP addresses. This informs Linux of local systems on
+the network which are not handled by the DNS server.
+======================================
+/etc/nsswitch.conf
+System Databases and Name Service Switch configuration file. Looks up /etc/hosts
+first, if host not found then it would query DNS server as defined by
+/etc/resolv.conf
+======================================
+/var
+Contains variable data like system logging files, mail and printer spool directories,
+and transient and temporary files.
+======================================
+/var/log
+Log files from the system and various programs/services, especially login
+(/var/log/wtmp, which logs all logins and logouts into the system) and syslog
+(/var/log/messages, where all kernel and system program message are usually
+stored).
+======================================
+/var/log/messages System logs. The first place you should look at if your system is
+in trouble.
+======================================
+/var/log/utmp
+Active user sessions. This is a data file and as such it can not be viewed normally.
+======================================
+/var/log/wtmp
+Log of all users who have logged into and out of the system. The last command can be
+used to access a human readable form of this file.
+======================================

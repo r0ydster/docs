@@ -14,4 +14,4 @@ MIT © Michael D. Royer
 
 ## Authors
 
-**Michael D. Royer** - *Initial work*
+**Michael D. Royer** - *Initial work* [r0ydster@mdrcs.com](mailto:r0ydster@mdrcs.com)
